@@ -2,9 +2,9 @@ name: CICD
 
 on: 
   push: 
-    branches: [ "live_server_kbg" ]
+    branches: [ "main" ]
   pull_request:
-    branches: [ "live_server_kbg" ]
+    branches: [ "main" ]
 
 permissions:
   contents: read
