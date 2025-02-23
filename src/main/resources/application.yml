@@ -2,6 +2,7 @@ spring:
   profiles:
     active: local
     group:
+<<<<<<< HEAD
       local: local_server, common,secret
       blue: blue_server , common, secret
       green: green_server , common, secret
@@ -51,3 +52,86 @@ spring:
 mybatis:
   mapper-location:
     - mappers/*.xml
+=======
+      local: local, common, secret
+      blue: blue, common, secret
+      green: green, common, secret
+
+server:
+  env: blue
+
+---
+
+spring:
+  config:
+    activate:
+      on-profile: local
+  security:
+    oauth2:
+      client:
+        registration:
+          kakao:
+            redirectUri: http://localhost:8080/login/oauth2/code/kakao
+          naver:
+            redirectUri: http://localhost:8080/login/oauth2/code/naver
+
+server:
+  port: 8080
+  address: localhost
+
+serverName: local_server
+
+---
+
+spring:
+  config:
+    activate:
+      on-profile: blue
+  security:
+    oauth2:
+      client:
+        registration:
+          kakao:
+            redirectUri: http://13.209.243.191/login/oauth2/code/kakao
+          naver:
+            redirectUri: http://13.209.243.191/login/oauth2/code/naver
+
+server:
+  port: 8080
+  address: 13.209.243.191
+
+serverName: blue_server
+
+---
+
+spring:
+  config:
+    activate:
+      on-profile: green
+  security:
+    oauth2:
+      client:
+        registration:
+          kakao:
+            redirectUri: http://13.209.243.191/login/oauth2/code/kakao
+          naver:
+            redirectUri: http://13.209.243.191/login/oauth2/code/naver
+
+server:
+  port: 8081
+  address: 13.209.243.191
+
+serverName: green_server
+
+---
+
+spring:
+  config:
+    import: application-secret.yml
+  mvc:
+    path match:
+      matching-strategy: ant_path_matcher
+mybatis:
+  mapper-locations:
+    - /mappers/*.xml
+>>>>>>> upstream/main
