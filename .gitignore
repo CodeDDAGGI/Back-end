@@ -1,4 +1,6 @@
 application-secret.yml
+docker-compose.yml
+docker/data/
 
 HELP.md
 target/

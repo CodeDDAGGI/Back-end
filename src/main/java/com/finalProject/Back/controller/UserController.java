@@ -4,6 +4,7 @@ import com.finalProject.Back.aspect.annotation.ValidAop;
 import com.finalProject.Back.dto.request.Token.ReqAccessDto;
 import com.finalProject.Back.dto.request.User.*;
 import com.finalProject.Back.dto.response.User.RespModifyProfile;
+import com.finalProject.Back.dto.response.User.RespSignupDto;
 import com.finalProject.Back.dto.response.email.RespEmailCheckDto;
 import com.finalProject.Back.entity.User;
 import com.finalProject.Back.exception.EmailAlreadyExistsException;

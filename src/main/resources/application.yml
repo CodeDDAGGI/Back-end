@@ -2,7 +2,6 @@ spring:
   profiles:
     active: local
     group:
-<<<<<<< HEAD
       local: local_server, common,secret
       blue: blue_server , common, secret
       green: green_server , common, secret
@@ -50,12 +49,10 @@ spring:
     activate:
       on-profile: common
 mybatis:
-  mapper-location:
-    - mappers/*.xml
-=======
-      local: local, common, secret
-      blue: blue, common, secret
-      green: green, common, secret
+  mapper-location: mappers/*.xml
+  local: local, common, secret
+  blue: blue, common, secret
+  green: green, common, secret
 
 server:
   env: blue
@@ -134,4 +131,3 @@ spring:
 mybatis:
   mapper-locations:
     - /mappers/*.xml
->>>>>>> upstream/main

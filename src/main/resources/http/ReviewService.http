@@ -1,0 +1,6 @@
+POST {{domain}}/review
+Content-Type: application/json
+
+{
+  "cafeId":
+}

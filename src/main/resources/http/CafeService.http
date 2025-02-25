@@ -1,0 +1,14 @@
+
+### POST
+POST {{domain}}/cafe/add
+Content-Type: application/json
+
+{
+  "ownerId": 1,
+  "cafename": "카페이름",
+  "address": "부산시 서동구",
+  "category": "커피,디저트",
+  "lat": "4215",
+  "lng": "21312",
+  "img": "default"
+}

@@ -1,0 +1,18 @@
+version: "3.2"
+
+services:
+  finalProject:
+    image: mysql:latest  # MySQL 이미지 사용
+    container_name: mysql-finalProject
+    restart: unless-stopped
+    command: --transaction-isolation=READ-COMMITTED --log-bin=binlog --binlog-format=ROW
+    ports:
+      - "3308:3306"  # 호스트 3308 포트 -> 컨테이너 3306 포트로 연결
+    volumes:
+      - ./data:/var/lib/mysql
+      - ./init:/docker-entrypoint-initdb.d
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: finalProject  # 데이터베이스 이름 설정
+      MYSQL_USER: user
+      MYSQL_PASSWORD: 1234
