@@ -1,9 +1,8 @@
 package com.finalProject.Back.dto.request.Cafe;
 
 import com.finalProject.Back.entity.Cafe.Cafe;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
-
-import javax.validation.constraints.NotBlank;
 
 @Data
 public class ReqCafeDto {

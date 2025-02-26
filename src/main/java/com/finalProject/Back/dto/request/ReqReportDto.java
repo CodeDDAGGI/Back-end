@@ -14,7 +14,7 @@ public class ReqReportDto {
         return Report.builder()
                 .contentId(contentId)
                 .content(content)
-                .reportId(reportId)
+                .user_id(reportId)
                 .reportType(reportType)
                 .build();
     }

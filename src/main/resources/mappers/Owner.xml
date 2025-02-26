@@ -5,6 +5,13 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.finalProject.Back.repository.OwnerMapper">
+    <insert id="saveOwner"
+            useGeneratedKeys="true"
+            keyProperty="id">>
+        insert
+        into owner
+        values(default , default , #{business_number}, #{company_name} ,#{company_address})
+    </insert>
     <delete id="deleteUser">
         delete
         from

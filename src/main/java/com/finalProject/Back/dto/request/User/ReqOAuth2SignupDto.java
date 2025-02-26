@@ -1,15 +1,11 @@
 package com.finalProject.Back.dto.request.User;
 
-
-import com.finalProject.Back.entity.OAuth2User;
 import com.finalProject.Back.entity.User;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 import lombok.Data;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-
-import javax.validation.constraints.AssertTrue;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Pattern;
 
 @Data
 public class ReqOAuth2SignupDto {
@@ -36,7 +32,6 @@ public class ReqOAuth2SignupDto {
     private String role;
 
     public User toUser(BCryptPasswordEncoder passwordEncoder){
-        System.out.println("체크체크" + oauth2Name);
         return User.builder()
                 .username(username)
                 .password(passwordEncoder.encode(password))
@@ -44,7 +39,6 @@ public class ReqOAuth2SignupDto {
                 .email(email)
                 .phoneNumber(phoneNumber)
                 .nickname(nickname)
-                .oauth(oauth2Name)
                 .role(role)
                 .build();
     }

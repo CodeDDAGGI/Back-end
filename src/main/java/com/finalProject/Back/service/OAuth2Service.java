@@ -47,9 +47,9 @@ public class OAuth2Service implements OAuth2UserService {
                 break;
 
             case "Naver":
-                attributes = (Map<String, Object>) attributes.get("response");
-                oAuth2Attributes.put("id" , attributes.get("id").toString());
-                System.out.println(attributes);
+                Map<String, Object> response = (Map<String, Object>) attributes.get("response");
+                oAuth2Attributes.put("id", response.get("id").toString());
+                System.out.println(response);
                 break;
 
             case "Kakao" :

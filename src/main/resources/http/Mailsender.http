@@ -1,0 +1,7 @@
+POST {{domain}}/mail/send
+Content-Type: application/json
+
+{
+  "email": "qudrb1132@naver.com"
+}
+

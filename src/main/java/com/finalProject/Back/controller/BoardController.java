@@ -4,13 +4,12 @@ import com.finalProject.Back.aspect.annotation.ValidAop;
 import com.finalProject.Back.dto.request.ReqBoardDto;
 import com.finalProject.Back.security.principal.PrincipalUser;
 import com.finalProject.Back.service.BoardService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-
-import javax.validation.Valid;
 
 @RestController
 public class BoardController {

@@ -5,17 +5,14 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
-
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Report {
+public class Owner {
     private Long id;
-    private Long contentId;
-    private String content;
-    private LocalDate reportDate;
     private Long user_id;
-    private String reportType;
+    private String business_number;
+    private String company_name;
+    private String company_address;
 }

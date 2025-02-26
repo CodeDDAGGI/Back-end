@@ -1,10 +1,7 @@
 package com.finalProject.Back.controller;
 
 import com.finalProject.Back.aspect.annotation.ValidAop;
-import com.finalProject.Back.dto.request.Token.ReqAccessDto;
 import com.finalProject.Back.dto.request.User.*;
-import com.finalProject.Back.dto.response.User.RespModifyProfile;
-import com.finalProject.Back.dto.response.User.RespSignupDto;
 import com.finalProject.Back.dto.response.email.RespEmailCheckDto;
 import com.finalProject.Back.entity.User;
 import com.finalProject.Back.exception.EmailAlreadyExistsException;
@@ -12,17 +9,14 @@ import com.finalProject.Back.security.principal.PrincipalUser;
 import com.finalProject.Back.service.OAuth2Service;
 import com.finalProject.Back.service.TokenService;
 import com.finalProject.Back.service.UserService;
+import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
 import java.util.Map;
 
 @Slf4j

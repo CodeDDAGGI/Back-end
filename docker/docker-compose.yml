@@ -16,3 +16,33 @@ services:
       MYSQL_DATABASE: finalProject  # 데이터베이스 이름 설정
       MYSQL_USER: user
       MYSQL_PASSWORD: 1234
+
+  rabbitmq:
+    image: rabbitmq:management
+    container_name: rabbitmq
+    restart: always
+    ports:
+      - "5672:5672"   # RabbitMQ 기본 AMQP 포트
+      - "15672:15672" # RabbitMQ 관리 UI 포트
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+    networks:
+      - my_network
+
+  app:
+    build: .   # 현재 디렉토리의 Dockerfile을 사용하여 빌드
+    container_name: springboot-app
+    restart: unless-stopped
+    depends_on:
+      - rabbitmq
+    environment:
+      SPRING_RABBITMQ_HOST: rabbitmq
+      SPRING_RABBITMQ_PORT: 5672
+      SPRING_RABBITMQ_USERNAME: guest
+      SPRING_RABBITMQ_PASSWORD: guest
+    networks:
+      - my_network
+
+networks:
+  my_network:

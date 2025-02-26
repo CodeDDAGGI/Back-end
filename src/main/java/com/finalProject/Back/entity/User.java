@@ -19,9 +19,8 @@ public class User {
     private String email;
     private String role;
     private String nickname;
-    private String phoneNumber;
-    private String oauth;
     private String img;
+    private String phoneNumber;
 
     public PrincipalUser toPrincipal() {
         return PrincipalUser.builder()

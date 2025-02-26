@@ -54,8 +54,14 @@ public class UserService {
                 throw new Oauth2NameException("중복된 이메일로 가입할 수 없습니다.");
             }
         }else {
-            userMapper.save(user);
+            if(dto.getRole().equals("OWNER")){
+                userMapper.save(user);
+            }else if(dto.getRole().equals("USER")) {
+                userMapper.save(user);
+            }
         }
+
+
 
         return RespSignupDto.builder()
                 .user(user)
@@ -85,7 +91,6 @@ public class UserService {
                 .role(dto.getRole())
                 .nickname(dto.getNickname())
                 .phoneNumber(dto.getPhoneNumber())
-                .oauth(dto.getOauth2Name())
                 .build();
 
         try {

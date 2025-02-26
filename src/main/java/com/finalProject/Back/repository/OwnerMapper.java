@@ -13,4 +13,5 @@ public interface OwnerMapper {
     List<RespGetOwnerDto> getOwners();
     Long deleteUser(Long id);
     Long deleteCafe(Long id);
+    int saveOwner(User user);
 }

@@ -1,10 +1,9 @@
 package com.finalProject.Back.dto.request;
 
 import com.finalProject.Back.entity.board.Board;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Builder;
 import lombok.Data;
-
-import javax.validation.constraints.NotBlank;
 
 public class ReqBoardDto {
 

@@ -1,22 +1,19 @@
 package com.finalProject.Back.controller;
 
 import com.finalProject.Back.aspect.annotation.ValidAop;
-import com.finalProject.Back.dto.request.ReqOAuth2CheckDto;
 import com.finalProject.Back.dto.request.Token.ReqAccessDto;
 import com.finalProject.Back.dto.request.User.ReqOAuth2SigninDto;
 import com.finalProject.Back.dto.request.User.ReqOAuth2SignupDto;
-import com.finalProject.Back.dto.request.User.ReqSigninDto;
 import com.finalProject.Back.exception.SignupException;
 import com.finalProject.Back.service.OAuth2Service;
 import com.finalProject.Back.service.TokenService;
 import com.finalProject.Back.service.UserService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-
-import javax.validation.Valid;
 
 @RestController
 public class AuthenticationController {

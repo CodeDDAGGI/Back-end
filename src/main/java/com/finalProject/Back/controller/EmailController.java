@@ -3,6 +3,7 @@ package com.finalProject.Back.controller;
 import com.finalProject.Back.dto.request.email.ReqEmail;
 import com.finalProject.Back.dto.request.email.ReqSendEmailDto;
 import com.finalProject.Back.service.UserService;
+import jakarta.mail.internet.MimeMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.FileSystemResource;
@@ -11,9 +12,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.web.bind.annotation.*;
 
-import javax.mail.internet.MimeMessage;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.HashMap;
@@ -31,19 +32,23 @@ public class EmailController {
 
     private Map<String, String> verificationCodes = new HashMap<>();
 
+    // 이메일 전송 로직
     @PostMapping("/mail/send")
     public ResponseEntity<String> sendVerificationCode(@RequestBody ReqEmail emailRequest) {
+
         String email = emailRequest.getEmail();
         String verificationCode = generateVerificationCode();
-        // 이메일 전송 로직
-        try {
-            sendEmail(email, verificationCode);
-            return ResponseEntity.ok(verificationCode);
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("메일 전송 실패");
-        }
+
+        long startTime = System.currentTimeMillis();
+        sendEmail(email, verificationCode);
+        long endTime = System.currentTimeMillis();
+        long duration = endTime - startTime;
+        System.out.println("전송 시간 : " + duration);
+        return ResponseEntity.ok(verificationCode);
+
     }
 
+    // 비밀번호 찾기 & 사용자 이름찾기
     @PostMapping("/mail/find/send/{email}")
         public ResponseEntity<String> sendEmailCode(@PathVariable String email, @RequestBody ReqSendEmailDto reqSendEmailDto) {
         if(reqSendEmailDto.getValue().equals("FindUser")|| reqSendEmailDto.getValue().equals("FindPassword")){
@@ -59,7 +64,8 @@ public class EmailController {
         }
     }
 
-    private void sendEmail(String email, String verificationCode) {
+    @Async("asyncExecutor")
+    public void sendEmail(String email, String verificationCode) {
         try {
             MimeMessage message = javaMailSender.createMimeMessage();
             MimeMessageHelper helper = new MimeMessageHelper(message, true, "utf-8");

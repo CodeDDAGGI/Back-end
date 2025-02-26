@@ -4,15 +4,15 @@ import com.finalProject.Back.entity.User;
 import com.finalProject.Back.repository.OAuth2UserMapper;
 import com.finalProject.Back.repository.UserMapper;
 import com.finalProject.Back.security.jwt.JwtProvider;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.core.user.DefaultOAuth2User;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Map;
 
@@ -33,10 +33,6 @@ public class OAuth2SuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
         String oAuth2Name = attributes.get("id").toString();
         String provider = attributes.get("provider").toString();
 
-        System.out.println("defaultOAuth2User" +defaultOAuth2User);
-        System.out.println("attributes " + attributes);
-        System.out.println("oAuth2Name"+oAuth2Name);
-        System.out.println("provider" + provider);
         User user = userMapper.findByOAuth2Name(oAuth2Name);
         System.out.println("user" + user);
         String redirectUrl;

@@ -3,14 +3,14 @@ POST {{domain}}/user/signup
 Content-Type: application/json
 
 {
-  "username" :"test112352",
+  "username" :"test1123512",
   "password" : "!Test1234",
   "checkPassword" : "!Test1234",
   "name" : "길동",
   "email" : "test@naver.com",
-  "phoneNumber": "010-9548-2134",
+  "role" : "OWNER",
   "nickname" : "기동이",
-  "role" : "USER"
+  "phoneNumber": "010-9548-2134"
 }
 
 ### UserSignin

@@ -8,8 +8,8 @@
     <insert id="save"
             useGeneratedKeys="true"
             keyProperty="id">
-        insert into user
-        values (default, #{username} , #{password} , #{name} , #{email} , #{role} , #{nickname} , default , #{oauth}  , #{phoneNumber}  )
+        INSERT INTO user (id , username, password, name, email, role, nickname, phone_number)
+        VALUES (default, #{username}, #{password}, #{name}, #{email}, #{role}, #{nickname}, #{phoneNumber})
     </insert>
 
     <update id="imgUpdate">
