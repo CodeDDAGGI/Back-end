@@ -1,2 +1,9 @@
 ###
-#POST http://
+POST {{domain}}}/board
+Content-Type: application/json
+
+{
+   "title" : "제목 1",
+  "content" : "내용 1",
+  "category" : "음"
+}

@@ -8,7 +8,7 @@
     <insert id="save"
             useGeneratedKeys="true"
             keyProperty="id">
-        INSERT INTO user (id , username, password, name, email, role, nickname, phone_number)
+        INSERT INTO user (id , username, password, name, email, role, nickname, phoneNumber)
         VALUES (default, #{username}, #{password}, #{name}, #{email}, #{role}, #{nickname}, #{phoneNumber})
     </insert>
 

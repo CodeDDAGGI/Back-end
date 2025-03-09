@@ -57,6 +57,7 @@ public class UserController {
                 .getAuthentication()
                 .getPrincipal();
         log.info("{}", principalUser);
+        log.info("{}", principalUser.getClass().getName());
         return ResponseEntity.ok().body(userService.getUserInfo(principalUser.getId()));
     }
 

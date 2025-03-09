@@ -8,9 +8,9 @@ Content-Type: application/json
   "checkPassword" : "!Test1234",
   "name" : "길동",
   "email" : "test@naver.com",
-  "role" : "OWNER",
-  "nickname" : "기동이",
-  "phoneNumber": "010-9548-2134"
+  "role" : "USER",
+  "phoneNumber": "010-9548-2134",
+  "nickname" : "기동이"
 }
 
 ### UserSignin
@@ -18,13 +18,35 @@ POST {{domain}}/user/signin
 Content-Type: application/json
 
 {
-  "username" : "test1123",
+  "username" : "test1123512",
   "password" : "!Test1234",
   "role" : "USER"
 }
 
+> {%
+    client.global.set("Token", response.body.json("token"));
+%}
+
 ### user/me
 GET {{domain}}/user/me
+Authorization: {{Token}}
+
+> {%
+    console.log("저장된 Token 값:", client.global.get("Token"));
+%}
 
 ### user프로필 중복
 GET {{domain}}/user/duplicated/username?value=test1234
+
+### user프로필 정보 수정
+PUT {{domain}}/user/info/username?value = test12345
+
+### 유저프로필 이미지 변경
+PUT {{domain}}/mypage/profile/img
+Content-Type: application/json
+Authorization: Bearer {{Token}}
+
+{
+  "id": "1",
+  "img": "down.img"
+}

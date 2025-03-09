@@ -38,9 +38,9 @@ CREATE TABLE IF NOT EXISTS board_like(
 );
 
 CREATE TABLE IF NOT EXISTS cafe(
-                                   id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-                                   owner_id BIGINT NOT NULL,
-                                   cafeName VARCHAR(255) NOT NULL,
+   id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+   owner_id BIGINT NOT NULL,
+   cafeName VARCHAR(255) NOT NULL,
     address VARCHAR(1000) NOT NULL,
     lat DOUBLE NOT NULL ,
     lng DOUBLE NOT NULL ,
@@ -118,3 +118,5 @@ CREATE TABLE IF NOT EXISTS review_category (
 );
 
 
+
+DESC user;

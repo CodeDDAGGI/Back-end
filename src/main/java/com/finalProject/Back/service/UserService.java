@@ -40,28 +40,16 @@ public class UserService {
 
     @Transactional(rollbackFor = Exception.class)
     public RespSignupDto userSignup(ReqSignupDto dto) {
-        User user = null;
-
-        user = dto.toEntity(passwordEncoder);
-        User foundUser = userMapper.findByUsername(user.getUsername());
-
-        if(foundUser != null){
-            if(dto.getUsername().equals(foundUser.getUsername())){
-                throw new SignupException("중복된 아이디입니다.");
-            }
-            if (oAuth2UserMapper.existsByEmail(dto.getEmail()) || userMapper.findByEmail(dto.getEmail()) != null) {
-                System.out.println("중복된 이메일입니다 " + dto.getEmail());
-                throw new Oauth2NameException("중복된 이메일로 가입할 수 없습니다.");
-            }
-        }else {
-            if(dto.getRole().equals("OWNER")){
-                userMapper.save(user);
-            }else if(dto.getRole().equals("USER")) {
-                userMapper.save(user);
-            }
+        if (userMapper.findByUsername(dto.getUsername()) != null) {
+            throw new SignupException("중복된 아이디입니다.");
+        }
+        boolean isEmailExists = oAuth2UserMapper.existsByEmail(dto.getEmail()) || userMapper.findByEmail(dto.getEmail()) != null;
+        if (isEmailExists) {
+            throw new Oauth2NameException("중복된 이메일로 가입할 수 없습니다.");
         }
 
-
+        User user = dto.toEntity(passwordEncoder);
+        userMapper.save(user);
 
         return RespSignupDto.builder()
                 .user(user)
