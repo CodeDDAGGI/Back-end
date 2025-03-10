@@ -70,9 +70,23 @@ public class MessageController {
     @GetMapping(value = "/message/events", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
     public SseEmitter streamNotifications(@RequestParam(value = "lastId", required = false) Long lastId,
                                           @RequestParam(value = "userId") Long userId) {
-        SseEmitter emitter = new SseEmitter(0L);  // 무제한 대기
-        System.out.println("userId2: " + userId);
+        SseEmitter emitter = new SseEmitter(0L);
         emitters.put(emitter, userId);
+
+        if (lastId != null) {
+            List<Message> missedMessages = messageService.getMissedMessages(userId, lastId);
+            missedMessages.forEach(message -> {
+                try {
+                    emitter.send(SseEmitter.event()
+                            .id(String.valueOf(message.getId())) // 메시지 ID 설정
+                            .name("message")
+                            .data(message));
+                } catch (IOException e) {
+                    emitter.completeWithError(e);
+                    emitters.remove(emitter);
+                }
+            });
+        }
 
         // 실시간 알림을 위해 주기적인 ping 전송
         Executors.newScheduledThreadPool(1).scheduleAtFixedRate(() -> {
@@ -89,7 +103,6 @@ public class MessageController {
         emitter.onTimeout(() -> emitters.remove(emitter));
         emitter.onError((e) -> emitters.remove(emitter));
 
-        System.out.println("emitter2: " + emitter);
         return emitter;
     }
 

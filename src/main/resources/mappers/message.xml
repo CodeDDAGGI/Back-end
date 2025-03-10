@@ -32,4 +32,9 @@
         where
             user_id = #{userId} or user_id = 0
     </select>
+    <select id="findMessagesAfterId" resultType="com.finalProject.Back.entity.Message">
+        SELECT * FROM messages
+        WHERE user_id = #{userId} AND id > #{lastId}
+        ORDER BY id ASC
+    </select>
 </mapper>

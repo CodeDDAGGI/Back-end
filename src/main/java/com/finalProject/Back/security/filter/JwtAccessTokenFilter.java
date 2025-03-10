@@ -30,12 +30,12 @@ public class JwtAccessTokenFilter extends GenericFilter {
 
         String bearerAccessToken = request.getHeader("Authorization");
 
-        if(bearerAccessToken == null || bearerAccessToken.isBlank()) {
+        if (bearerAccessToken == null || bearerAccessToken.isBlank()) {
             filterChain.doFilter(servletRequest, servletResponse);
             return;
         }
 
-        String accessToken = jwtProvider.removeBearer(bearerAccessToken);
+        String accessToken = jwtProvider.removeBearer(bearerAccessToken).trim();
         Claims claims = null;
         try {
             claims = jwtProvider.getClaims(accessToken);
@@ -49,7 +49,7 @@ public class JwtAccessTokenFilter extends GenericFilter {
                 throw new JwtException("해당 ID(" + userId + ")의 사용자 정보를 찾지 못했습니다.");
             }
             PrincipalUser principalUser = user.toPrincipal();
-            Authentication authentication = new UsernamePasswordAuthenticationToken(principalUser, null);
+            Authentication authentication = new UsernamePasswordAuthenticationToken(principalUser, null, principalUser.getAuthorities());
             SecurityContextHolder.getContext().setAuthentication(authentication);
 
         } catch (JwtException e) {

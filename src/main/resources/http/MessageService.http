@@ -1,0 +1,4 @@
+
+### SSE 이벤트 스트리밍 테스트
+GET {{domain}}/message/events?userId=1&lastId=1
+Accept: text/event-stream

@@ -50,4 +50,5 @@ public class JwtProvider {
                 .build();
         return  jwtParser.parseClaimsJws(token).getPayload();
     }
+
 }

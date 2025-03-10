@@ -1,6 +1,7 @@
 package com.finalProject.Back.config;
 
 
+import com.finalProject.Back.security.filter.JwtAccessTokenFilter;
 import com.finalProject.Back.security.handler.OAuth2SuccessHandler;
 import com.finalProject.Back.service.OAuth2Service;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 
 @EnableWebSecurity
@@ -21,6 +23,8 @@ public class SecurityConfig {
     private OAuth2SuccessHandler oAuth2SuccessHandler;
     @Autowired
     private OAuth2Service oAuth2Service;
+    @Autowired
+    private JwtAccessTokenFilter jwtAccessTokenFilter;
 
    @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -51,7 +55,9 @@ public class SecurityConfig {
                .oauth2Login(oauth2 -> oauth2
                        .successHandler(oAuth2SuccessHandler)
                        .userInfoEndpoint(userInfo -> userInfo.userService(oAuth2Service))
-               );
+               )
+               .addFilterBefore(jwtAccessTokenFilter, UsernamePasswordAuthenticationFilter.class);
+
        return http.build();
    }
 

@@ -165,6 +165,13 @@
 			<artifactId>spring-security-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-core</artifactId>
+			<version>6.1.2</version> <!-- Spring Boot 3.x와 호환되는 최신 버전 -->
+		</dependency>
+
     </dependencies>
 	<build>
 		<plugins>

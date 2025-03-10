@@ -10,4 +10,5 @@ public interface MessageMapper {
     int save(Message message);
     List<Message> findByUserId(Long userId);
     int deleteById(Long Id);
+    List<Message> findMessagesAfterId(Long userId, Long lastId);
 }

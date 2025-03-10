@@ -36,6 +36,10 @@ public class MessageService {
         return messageId;  // Return the generated ID
     }
 
+    public List<Message> getMissedMessages(Long userId , Long lastId) {
+        return messageMapper.findMessagesAfterId(userId,  lastId);
+    }
+
     public Long findByTypeId(String type, Long contentId){
         if(type.equals("게시글")){
             return boardMapper.findByBoardId(contentId);
